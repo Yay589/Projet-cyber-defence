@@ -2,7 +2,8 @@ Vagrant.configure("2") do |config|
     
     # Configuration du pare-feu pfSense
     config.vm.define "firewall" do |firewall|
-      firewall.vm.box = "pfsense/pfsense"
+      config.vm.box = "hichemlamine/pfsense-2.7.2"
+      config.vm.box_version = "2.7.2"
       firewall.vm.network "private_network", type: "dhcp", virtualbox__intnet: "net_wan", auto_config: false
       firewall.vm.network "private_network", type: "dhcp", virtualbox__intnet: "net_server", auto_config: false
       firewall.vm.network "private_network", type: "dhcp", virtualbox__intnet: "net_client", auto_config: false
