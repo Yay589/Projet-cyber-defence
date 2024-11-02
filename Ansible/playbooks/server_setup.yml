@@ -1,0 +1,26 @@
+---
+- name: Setup Docker and Vulnerability Scanners on Server
+  hosts: server
+  become: true
+
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+      tags: docker
+
+    - name: Build Nmap Docker container
+      docker_image:
+        path: ../../docker/nmap
+        name: nmap_scanner
+
+    - name: Build Nikto Docker container
+      docker_image:
+        path: ../../docker/nikto
+        name: nikto_scanner
+
+    - name: Build OpenVAS Docker container
+      docker_image:
+        path: ../../docker/openvas
+        name: openvas_scanner
