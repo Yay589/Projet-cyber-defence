@@ -1,0 +1,19 @@
+Security Audit Report
+====================
+Host: {{ inventory_hostname }}
+Date: {{ ansible_date_time.iso8601 }}
+
+Network Scan Results:
+{% for port in port_scan_results.results %}
+Port {{ port.item }}: {{ port.state }}
+{% endfor %}
+
+System Security:
+Updates Available: {{ updates_available.changed }}
+User Accounts: {{ user_accounts.passwd | length }}
+Sudo Configuration Issues: {{ sudo_rights.stdout_lines | length }}
+
+Web Security:
+Web Server Status: {{ web_status.status }}
+Vulnerable Endpoints Found: {{ vulnerability_test.results | length }}
+SSL/TLS Issues: {{ ssl_check.stdout_lines | length }}

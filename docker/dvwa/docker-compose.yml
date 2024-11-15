@@ -1,0 +1,20 @@
+#"""
+version: '3'
+services:
+  dvwa:
+    image: vulnerables/web-dvwa
+    ports:
+      - "80:80"
+      - "2222:22"
+    environment:
+      - MYSQL_USER=root
+      - MYSQL_PASS=password
+      - MYSQL_DB=dvwa
+    restart: always
+  metasploit:
+    image: metasploitframework/metasploit-framework
+    ports:
+      - "4444:4444"
+      - "55553:55553"
+    tty: true
+    stdin_open: true

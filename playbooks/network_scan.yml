@@ -1,0 +1,41 @@
+# playbooks/network_scan.yml
+---
+- name: Network Security Audit
+  hosts: targets
+  become: yes
+  gather_facts: yes
+  
+  tasks:
+    - name: Port Scanning with Ansible
+      ansible.builtin.wait_for:
+        host: "{{ inventory_hostname }}"
+        port: "{{ item }}"
+        timeout: 1
+      ignore_errors: yes
+      loop:
+        - 21  # FTP
+        - 22  # SSH
+        - 23  # Telnet
+        - 80  # HTTP
+        - 443 # HTTPS
+      register: port_scan_results
+
+    - name: Check for Open SSH Access
+      ansible.builtin.shell: |
+        ss -tunlp | grep :22
+      register: ssh_check
+      ignore_errors: yes
+
+    - name: Check DNS Resolution
+      ansible.builtin.command: "dig {{ inventory_hostname }}"
+      register: dns_check
+      delegate_to: localhost
+
+    - name: Store Network Scan Results
+      ansible.builtin.copy:
+        content: |
+          Port Scan Results: {{ port_scan_results | to_nice_json }}
+          SSH Status: {{ ssh_check.stdout }}
+          DNS Info: {{ dns_check.stdout }}
+        dest: "/tmp/network_scan_{{ inventory_hostname }}.log"
+      delegate_to: localhost
