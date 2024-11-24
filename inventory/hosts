@@ -16,7 +16,7 @@
 ansible_controller ansible_host=172.23.100.194
 
 [targets]
-dvwa ansible_host=172.23.100.20
+dvwa ansible_host=172.20.0.3
 #vulnerable_linux ansible_host=172.23.100.30
 
 [all:vars]
