@@ -1,0 +1,18 @@
+#####Cyber Defence Dan Group Project - INSA 2024#####
+
+#Description
+
+This project is designed to replicate the a simple IT architecture using Docker containers. Once the contenerized basic architecture is setup, we proceed by creating some  vulnerabilities and try to detect and respond to them using  ansible  modules. Some of the  scenarios  that will be seen  through this  project  are:
+- Deployement of a  vulnerable containerized machine (such as DVWA) and analyze network-based vulnerabilities using Ansible modules.
+.......
+
+The main objective is to deepen our knowledge of Ansible playbooks and Docker containers by working on realistic scenarios involving automation and container management.
+
+#Prerequisites
+
+Before cloning the GitHub repository, ensure your environment meets the following requirements:
+
+Operating System: Ubuntu 22.04.
+Docker: Version 20.10.27 or later.
+Ansible: Version 2.10.8 or later.
+Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
