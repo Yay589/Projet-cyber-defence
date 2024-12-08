@@ -1,0 +1,14 @@
+Hello guys  
+This will create  the dvwa container with the ssh enabled
+In this  folder just  type 
+docker-compose build  //  Create the image from the dockerfile
+docker-compose up -d  //  Creates the container and stats it 
+!!!!!!!!!!! Achtung !!!!!!!!!!!
+The ssh probably  may not work because the  ssh service has not started 
+A solution to  this  is to start it manually  
+How to do this  ? 
+1/ exec into the container
+docker exec -it container_id /bin/bash 
+2/ system ssh start 
+3/ quit 
+4/ ssh root@localhost -p 2223
