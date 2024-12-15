@@ -9,6 +9,6 @@ A solution to  this  is to start it manually
 How to do this  ? 
 1/ exec into the container
 docker exec -it container_id /bin/bash 
-2/ system ssh start 
+2/ service ssh start 
 3/ quit 
-4/ ssh root@localhost -p 2223
+4/ ssh root@localhost -p 2224
