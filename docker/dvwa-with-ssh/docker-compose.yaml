@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   dvwa:
     build: .
@@ -9,3 +7,15 @@ services:
     volumes:
       - ./data:/var/www/html  # Optional: Persist DVWA data if needed
     container_name: dvwa_container
+    networks:
+      my_custom_network:
+        ipv4_address: 172.18.0.2    # use the ip address of the Docker bridge network
+
+networks:
+  my_custom_network:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.18.0.2/24  # Plage d'adresses IP personnalisée pour le réseau
+          gateway: 172.18.0.1
