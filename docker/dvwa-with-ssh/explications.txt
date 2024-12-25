@@ -1,4 +1,5 @@
 Hello guys  
+######### Access container with ssh #########
 This will create  the dvwa container with the ssh enabled
 In this  folder just  type 
 docker-compose build  //  Create the image from the dockerfile
@@ -12,3 +13,14 @@ docker exec -it container_id /bin/bash
 2/ service ssh start 
 3/ quit 
 4/ ssh root@localhost -p 2224
+####### Execute ansible  playbooks ##########
+After you  make sure that u can ssh into the container with your container ip address
+( You will have to customize the network section in the docker-compose file and the 
+ inventory.txt to set the  ip address of ur container )
+- The inventory.txt inside the  invetory folder will contain the  list of our targets (Containers) 
+- The  verified_playbooks under the playbooks folder will contain some verified ansible playbooks for network  scan  
+- To execute the  playbooks execute  these commands one by  one : 
+# These two  playbooks  do the same  thing but coded differently
+    1/  ansible-playbook -i inventory.txt ./playbooks/nmap_scan.yml
+    2/  ansible-playbook -i inventory.txt ./playbooks/ports_scan.yml
+# After the playbooks beeing executed correctly you will see the report files in the /tmp  directory
