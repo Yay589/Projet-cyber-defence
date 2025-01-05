@@ -9,9 +9,7 @@ services:
     container_name: dvwa_container
     networks:
       my_custom_network:
-        ipv4_address: 192.168.131.191  # Adresse IP statique pour ce service
-
-# Vous pouvez ajouter d'autres services ici...
+        ipv4_address: 172.18.0.2    # use the ip address of the Docker bridge network
 
 networks:
   my_custom_network:
@@ -19,5 +17,5 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: 192.168.131.0/24  # Plage d'adresses IP personnalisée pour le réseau
-          gateway: 192.168.131.19
+        - subnet: 172.18.0.2/24  # Plage d'adresses IP personnalisée pour le réseau
+          gateway: 172.18.0.1
