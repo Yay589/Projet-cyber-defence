@@ -2,8 +2,8 @@ services:
   dvwa:
     build: .
     ports:
-      - "2223:22"    # Map container SSH port to host port 2223
-      - "83:80"      # Map container web app port to host port 83
+      - "2224:22"    # Map container SSH port to host port 2223
+      - "84:80"      # Map container web app port to host port 83
     volumes:
       - ./data:/var/www/html  # Optional: Persist DVWA data if needed
     container_name: dvwa_container

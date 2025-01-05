@@ -9,7 +9,7 @@ A solution to  this  is to start it manually
 How to do this  ? 
 1/ exec into the container
 docker exec -it container_id /bin/bash 
-2/ system ssh start 
+2/ service ssh start 
 3/ quit 
 4/ try to ssh the container from your local machine  
     - There are  two methods to authenticate to ssh into the container :
@@ -18,5 +18,6 @@ docker exec -it container_id /bin/bash
         # NB: the  port  2223 can be in use in  your  laptop  so u will have to use another port rather(2224 for ex and do not forget to change it in the docker-compoe.yaml)
         - ssh root@ipaddress  -p 22   #  This will ssh through  the bride ip address pool for docker  
         
+
 
 
