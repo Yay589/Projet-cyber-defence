@@ -1,0 +1,41 @@
+Hello guys  
+######### Access container with ssh #########
+This will create  the dvwa container with the ssh enabled
+In this  folder just  type 
+docker-compose build  //  Create the image from the dockerfile
+docker-compose up -d  //  Creates the container and stats it 
+!!!!!!!!!!! Attention !!!!!!!!!!!
+The ssh probably  may not work because the  ssh service has not started 
+A solution to  this  is to start it manually  
+How to do this  ? 
+1/ exec into the container
+docker exec -it container_id /bin/bash 
+2/ service ssh start 
+3/ quit 
+4/ ssh root@localhost -p 2224
+####### Test ansible ssh connection to targets ##########
+##### !!!!! Make sure that python3 is installed on the docker container  (The version must be  compatible the one installed on the  ansible controller)####   
+ansible vulnerable_containers -m ping  -vvvv -i ./inventory.txt #  we can siumply add all  but  it is better to specify the targets
+####### Execute ansible  playbooks ##########
+After you  make sure that u can ssh into the container with your container ip address
+( You will have to customize the network section in the docker-compose file and the 
+ inventory.txt to set the  ip address of ur container )
+- The inventory.txt inside the  invetory folder will contain the  list of our targets (Containers) 
+- The  verified_playbooks under the playbooks folder will contain some verified ansible playbooks for network  scan  
+- To execute the  playbooks execute  these commands one by  one : 
+# These two  playbooks  do the same  thing but coded differently
+    1/   
+    2/  ansible-playbook -i inventory.txt ./playbooks/ports_scan.yml
+# After the playbooks beeing executed correctly you will see the report files in the /tmp  directory
+
+#################  Preparing  for  BruteForce detection Scenario   ############
+#1# Prepare the ubuntu 20.04 container  
+## In the docker-compose file  I installed some openssh, python3  and some basic tools  to configure the container 
+## Once the container is active, some changes must be done. The playbook will extract the  logs from the  /var/log/auth.log file  
+which can not be found.  I installed rsyslog  and  configured the rsyslog  under /etc/rsyslog/rsyslog.conf  by adding this line   "auth,authpriv.* /var/log/auth.log"
+#  Do not  forget to restart the rsyslog and the ssh service
+#  fix the  firwall  problem
+
+
+my favorite command for debugging after a fix :
+docker-compose down && docker-compose build && docker-compose up -d && docker ps
