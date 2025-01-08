@@ -12,8 +12,14 @@ echo "root:root" | chpasswd
 # Enable root login and password authentication in sshd_config
 sed -i 's/^#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 sed -i 's/^#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
+
 # Open the ssh  port 22
 sed -i 's/^#Port 22/Port 22/' /etc/ssh/sshd_config
+
+#apache
+sudo grep -q '^ServerName' /etc/apache2/apache2.conf || echo 'ServerName localhost' | sudo tee -a /etc/apache2/apache2.conf
+#apache en arriere plan
+apachectl -D FOREGROUND &
 
 # Start SSH service
 service ssh start

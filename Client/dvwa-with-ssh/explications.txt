@@ -38,4 +38,5 @@ which can not be found.  I installed rsyslog  and  configured the rsyslog  under
 
 
 my favorite command for debugging after a fix :
-docker-compose down && docker-compose build && docker-compose up -d && docker ps
+docker-compose down && docker-compose --env-file ../../Solution/var.env build && docker-compose --env-file ../../Solution/var.env up -d && docker ps
+
