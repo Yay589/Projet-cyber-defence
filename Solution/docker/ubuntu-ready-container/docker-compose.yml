@@ -1,8 +1,26 @@
+networks:
+  custom_network_client:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${S_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
+  custom_network_controler:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: ${C_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
+        - gateway: ${C_GATEWAY}
 services:
-    ubuntu-container:
-      build:
-        context: .
-        dockerfile: Dockerfile
-      ports:
-        - "${S_SSH_PORT}:22"  # Map SSH to host port 2222
-      container_name: ubuntu-ready-container
+  ubuntu-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "2222:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte
+    container_name: ubuntu-ready-container
+    networks:
+      custom_network_client:
+        ipv4_address: ${S_CONTAINER_IP1}  # IP fixe sur le premier réseau
+      custom_network_controler:
+        ipv4_address: ${S_CONTAINER_IP2}  # IP fixe sur le second réseau
+
