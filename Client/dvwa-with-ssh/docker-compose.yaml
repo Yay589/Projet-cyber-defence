@@ -2,14 +2,14 @@ services:
   dvwa:
     build: .
     ports:
-      - "${SSH_PORT}:22"    # Map container SSH port to host port 2223
-      - "${WEB_PORT}:80"      # Map container web app port to host port 83
+      - "${C_SSH_PORT}:22"    # Map container SSH port to host port 2223
+      - "${C_WEB_PORT}:80"      # Map container web app port to host port 83
     volumes:
       - ./data:/var/www/html  # Optional: Persist DVWA data if needed
     container_name: dvwa_container
     networks:
       my_custom_network:
-        ipv4_address: ${CONTAINER_IP}  # Adresse IP statique pour ce service
+        ipv4_address: ${C_CONTAINER_IP}  # Adresse IP statique pour ce service
 
 # Vous pouvez ajouter d'autres services ici...
 
@@ -19,5 +19,5 @@ networks:
     ipam:
       driver: default
       config:
-        - subnet: ${SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
-          gateway: ${GATEWAY}
+        - subnet: ${C_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
+          gateway: ${C_GATEWAY}
