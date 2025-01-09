@@ -1,15 +1,7 @@
 networks:
   custom_network_client:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: ${S_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
-  custom_network_controler:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: ${C_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
-        - gateway: ${C_GATEWAY}
+    external: true
+
 services:
   ubuntu-container:
     build:
@@ -20,7 +12,5 @@ services:
     container_name: ubuntu-ready-container
     networks:
       custom_network_client:
-        ipv4_address: ${S_CONTAINER_IP1}  # IP fixe sur le premier réseau
-      custom_network_controler:
-        ipv4_address: ${S_CONTAINER_IP2}  # IP fixe sur le second réseau
-
+        ipv4_address: ${S_CONTAINER_IP}  # IP fixe sur le premier réseau
+     
