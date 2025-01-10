@@ -1,3 +1,7 @@
+networks:
+  custom_network_client:
+    external: true
+
 services:
   dvwa:
     build: .
@@ -8,16 +12,5 @@ services:
       - ./data:/var/www/html  # Optional: Persist DVWA data if needed
     container_name: dvwa_container
     networks:
-      my_custom_network:
+      custom_network_client:
         ipv4_address: ${C_CONTAINER_IP}  # Adresse IP statique pour ce service
-
-# Vous pouvez ajouter d'autres services ici...
-
-networks:
-  my_custom_network:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: ${C_SUBNET}  # Plage d'adresses IP personnalisée pour le réseau
-          gateway: ${C_GATEWAY}
