@@ -4,6 +4,10 @@
 set -e  # Arrête le script si une commande échoue
 set -x  # Affiche chaque commande exécutée
 
+chmod 777 ../Client/dvwa-with-ssh/Start_Client.sh
+chmod 777 ../Client/dvwa-with-ssh/setup_ssh.sh
+chmod 777 ./docker/ubuntu-ready-container/Start_Controler.sh
+
 #Création du réseaux 
 source ./var.env && docker network create \
   --driver bridge \
@@ -13,7 +17,6 @@ source ./var.env && docker network create \
 
 # Démarer DVWA:
 ./../Client/dvwa-with-ssh/Start_Client.sh
-
 # Démarer le controler :
 ./docker/ubuntu-ready-container/Start_Controler.sh
 
