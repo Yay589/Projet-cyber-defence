@@ -1,0 +1,16 @@
+networks:
+  custom_network_client:
+    external: true
+
+services:
+  ubuntu-container:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3333:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte
+    container_name: ubuntu-ban
+    networks:
+      custom_network_client:
+        ipv4_address: 192.168.19.85  # IP fixe sur le premier réseau
+     

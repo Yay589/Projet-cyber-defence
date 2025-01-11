@@ -4,11 +4,9 @@ networks:
 
 services:
   ubuntu-container:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: ubuntu-test:v11.01
     ports:
-      - "2222:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte
+      - "2227:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte
     container_name: ubuntu-ready-container
     networks:
       custom_network_client:

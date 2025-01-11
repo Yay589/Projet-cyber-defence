@@ -1,15 +1,15 @@
-FROM vulnerables/web-dvwa
+FROM dvwa_11_01_17h_21
 
 # Point to the archived Debian Stretch repositories
 RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list && \
     echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list && \
     echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
-    apt-get update && \
+    apt-get update -y && \
     apt-get install -y nano
 
 # Copy the bash script and make it executable
 COPY setup_ssh.sh /setup_ssh.sh
-RUN chmod +x /setup_ssh.sh
+RUN chmod 777 /setup_ssh.sh
 
 # Run the bash script to configure SSH
 RUN /setup_ssh.sh
