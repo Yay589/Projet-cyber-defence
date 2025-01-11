@@ -19,6 +19,9 @@ source ./var.env && docker network create \
 ./../Client/dvwa-with-ssh/Start_Client.sh
 # Démarer le controler :
 ./docker/ubuntu-ready-container/Start_Controler.sh
+#Démarer Ban
+./../Client//Ban/Start_Ban.sh
+
 
 ## Étape 1 : Exécuter le playbook principal
 #ansible-playbook -i inventory/hosts playbooks/main.yml
