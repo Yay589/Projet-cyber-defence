@@ -1,14 +1,22 @@
 FROM controller_updated:v2
 
+# Exposer les ports nécessaires
+EXPOSE 22 80
+
 # Créer le répertoire de travail
 WORKDIR /ansible-config/
 
 # Copier les fichiers nécessaires
-COPY ../../playbooks/verified-playbooks /ansible-config/verified-playbooks/
-COPY ../../playbooks/inventory/inventory.txt /ansible-config/inventory.txt
 
-EXPOSE 22 80
+COPY ./verified_playbooks/ /ansible-config/verified-playbooks/
+COPY ./inventory.txt /ansible-config/inventory.txt
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
 
-# Start SSH service
+# Rendre le script d'entrée exécutable
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Configurer le point d'entrée
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+
+# Commande par défaut
 CMD ["/usr/sbin/sshd", "-D"]
-# Laisser l'exécution des playbooks au niveau du fichier docker-compose.yml

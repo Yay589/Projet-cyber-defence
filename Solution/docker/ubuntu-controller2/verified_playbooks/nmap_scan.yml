@@ -1,0 +1,31 @@
+---
+- name: Run Nmap Scan on Target Hosts
+  hosts: all
+  become: yes
+  tasks:
+
+    - name: Ensure nmap is installed
+      ansible.builtin.package:
+        name: nmap
+        state: present
+
+    - name: Perform an Nmap scan
+      ansible.builtin.command:
+        argv:
+          - nmap
+          - -sV
+          - -p
+          - "1-65535"
+          - "{{ inventory_hostname }}"
+      register: nmap_output
+
+    - name: Display scan results
+      ansible.builtin.debug:
+        var: nmap_output.stdout
+
+    - name: Save scan results to a file
+      ansible.builtin.copy:
+        dest: "/tmp/manual_nmap_{{ inventory_hostname }}.txt"
+        content: "{{ nmap_output.stdout }}"
+      delegate_to: localhost
+

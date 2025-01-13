@@ -5,7 +5,9 @@ networks:
 services:
   ubuntu-container:
     privileged: true
-    image: controler_ok:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "4444:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte
     container_name: test_reseau
