@@ -27,4 +27,4 @@ grep -q '^ServerName' /etc/apache2/apache2.conf || echo 'ServerName 8.8.8.8' |  
 apachectl -D FOREGROUND &
 
 # Start SSH service
-service ssh start
+service ssh start && wait

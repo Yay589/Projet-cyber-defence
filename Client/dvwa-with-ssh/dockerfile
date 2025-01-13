@@ -1,21 +1,14 @@
 FROM dvwa_11_01_17h_21
 
-# Point to the archived Debian Stretch repositories
-RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list && \
-    echo "deb http://archive.debian.org/debian-security stretch/updates main" >> /etc/apt/sources.list && \
-    echo 'Acquire::Check-Valid-Until "false";' > /etc/apt/apt.conf.d/99no-check-valid-until && \
-    apt-get update -y && \
-    apt-get install -y nano
+# Expose the required ports
+EXPOSE 22 80
+
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
 # Copy the bash script and make it executable
 COPY setup_ssh.sh /setup_ssh.sh
 RUN chmod 777 /setup_ssh.sh
 
-# Run the bash script to configure SSH
-RUN /setup_ssh.sh
-
-# Expose the required ports
-EXPOSE 22 80
-
 # Start Apache (DVWA) and SSH services
-CMD service ssh start
+CMD /setup_ssh.sh

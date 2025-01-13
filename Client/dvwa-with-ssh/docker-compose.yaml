@@ -12,6 +12,7 @@ services:
     volumes:
       - ./data:/var/www/html  # Optional: Persist DVWA data if needed
     container_name: dvwa_container
+    command: service ssh start && wait
     networks:
       custom_network_client:
         ipv4_address: ${C_CONTAINER_IP}  # Adresse IP statique pour ce service
