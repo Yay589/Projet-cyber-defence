@@ -1,0 +1,20 @@
+services:
+  ansible-runner:
+    privileged: true  # Nécessaire si votre conteneur a besoin d'un accès root pour certaines tâches
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /ansible-config
+    ports:
+      - "2228:22"  # Mappe le port SSH du conteneur au port 2227 de l'hôte
+    container_name: ubuntu-ready-container
+    networks:
+      custom_network_client:
+        ipv4_address: ${S_CONTAINER_IP}  # IP fixe à définir dans un fichier .env
+    command: >
+      /bin/bash -c "
+      ansible-playbook -i inventory.txt verified-playbooks/fail2ban-bruteforce.yml &&
+      ansible-playbook -i inventory.txt verified-playbooks/ports_scan.yml &&
+      ansible-playbook -i inventory.txt verified-playbooks/nmap_scan.yml"
+    environment:
+      ANSIBLE_HOST_KEY_CHECKING: "False"  # Variable d'environnement pour désactiver la vérification des clés SSH

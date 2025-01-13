@@ -4,6 +4,7 @@ networks:
 
 services:
   ubuntu-container:
+    privileged: true
     image: ubuntu-test:v11.01
     ports:
       - "2227:22"  # Mappe le port SSH du conteneur au port 2222 de l'hôte

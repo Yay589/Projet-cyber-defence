@@ -1,0 +1,14 @@
+FROM controller_updated:v2
+
+# Créer le répertoire de travail
+WORKDIR /ansible-config/
+
+# Copier les fichiers nécessaires
+COPY ../../playbooks/verified-playbooks /ansible-config/verified-playbooks/
+COPY ../../playbooks/inventory/inventory.txt /ansible-config/inventory.txt
+
+EXPOSE 22 80
+
+# Start SSH service
+CMD ["/usr/sbin/sshd", "-D"]
+# Laisser l'exécution des playbooks au niveau du fichier docker-compose.yml

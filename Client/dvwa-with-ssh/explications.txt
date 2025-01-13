@@ -30,7 +30,7 @@ After you  make sure that u can ssh into the container with your container ip ad
 
 #################  Preparing  for  BruteForce detection Scenario   ############
 #1# Prepare the ubuntu 20.04 container  
-## In the docker-compose file  I installed some openssh, python3  and some basic tools  to configure the container 
+## In the docker-compose file  I installed some openssh, python3e: fail and some basic tools  to configure the container 
 ## Once the container is active, some changes must be done. The playbook will extract the  logs from the  /var/log/auth.log file  
 which can not be found.  I installed rsyslog  and  configured the rsyslog  under /etc/rsyslog/rsyslog.conf  by adding this line   "auth,authpriv.* /var/log/auth.log"
 #  Do not  forget to restart the rsyslog and the ssh service

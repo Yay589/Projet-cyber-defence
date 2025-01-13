@@ -1,33 +1,25 @@
+# Base image
 FROM ubuntu:20.04
 
-# Set environment variables to prevent interactive prompts during installation
+# Set environment variable to disable prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
+
+# Update, install necessary packages, and clean up
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    net-tools \
+    openssh-server \
+    python3.8 \
+    python3-pip && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+# apt install -y ansible
+# Set up SSH server
+RUN mkdir /var/run/sshd && echo "root:root" | chpasswd && \
+    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
+    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config
 
 # Expose SSH port
 EXPOSE 22
 
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
-
-# Update the system and install required packages
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3 python3-pip python3-apt \
-    ansible \
-    nano \
-    openssh-server \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Set up SSH
-RUN mkdir /var/run/sshd && \
-    echo 'root:rootpassword' | chpasswd && \
-    sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
-    sed -i 's/#PasswordAuthentication yes/PasswordAuthentication yes/' /etc/ssh/sshd_config && \
-    echo 'PasswordAuthentication yes' >> /etc/ssh/sshd_config
-
-# Allow root login by setting the password (change "rootpassword" to your desired password)
-ENV ROOT_PASSWORD rootpassword
-
-
-
-# Start the SSH service when the container starts
+# Start SSH service
 CMD ["/usr/sbin/sshd", "-D"]
