@@ -9,17 +9,17 @@ RUN echo "root:root" | chpasswd
 
 # Copier les fichiers nécessaires
 COPY ./verified_playbooks/ /ansible-config/verified-playbooks/
-COPY ./inventory.txt /ansible-config/inventory.txt
+COPY ./inventory/ /ansible-config/inventory/
 COPY ./entrypoint.sh /ansible-config/entrypoint.sh
 
 
 # Rendre le script d'entrée exécutable
 RUN chmod -R 777 /ansible-config/verified-playbooks/
-RUN chmod 777 /ansible-config/inventory.txt
+RUN chmod -R 777 /ansible-config/inventory/
 RUN chmod 777 /ansible-config/entrypoint.sh
 
 # Configurer le point d'entrée
 ENTRYPOINT ["/ansible-config/entrypoint.sh"]
 
 # Start SSH service
-CMD ["/bin/bash", "-c", "/ansible-config/entrypoint.sh && /usr/sbin/sshd -D"]
+CMD ["/bin/bash", "-c", "/ansible-config/entrypoint.sh && /usr/sbin/sshd -D && wait"]

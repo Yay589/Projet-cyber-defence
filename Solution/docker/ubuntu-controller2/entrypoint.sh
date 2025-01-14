@@ -11,9 +11,10 @@ set -x  # Affiche chaque commande exécutée
 touch /B.txt
 
 # Exécuter les playbooks Ansible
-ansible-playbook -i /ansible-config/inventory.txt /ansible-config/verified-playbooks/fail2ban-bruteforce.yml &&
-ansible-playbook -i /ansible-config/inventory.txt /ansible-config/verified-playbooks/ports_scan.yml &&
-ansible-playbook -i /ansible-config/inventory.txt /ansible-config/verified-playbooks/nmap_scan.yml
+#ansible-playbook -i /ansible-config/inventory/inventory.txt /ansible-config/verified-playbooks/fail2ban-bruteforce.yml &&
+#ansible-playbook -i /ansible-config/inventory/inventory.txt /ansible-config/verified-playbooks/ports_scan.yml 
+#ansible-playbook -i /ansible-config/inventory/inventory.txt /ansible-config/verified-playbooks/nmap_scan.yml 
+#ansible-playbook -i /ansible-config/inventory/hosts /ansible-config/verified-playbooks/lynis.yml --ask-become-pass
 
 touch /C.txt
 

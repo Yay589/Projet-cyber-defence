@@ -6,7 +6,7 @@ set -x  # Affiche chaque commande exécutée
 
 
 # Install OpenSSH server  |  Python Packages  should be installed to make the ansible work  properly 
-apt-get install -y openssh-server && apt install -y python3
+apt-get install -y openssh-server && apt install -y apache2
 
 # Create directory for sshd to run
 #mkdir /var/run/sshd  (IF OPENSSH IS INSTALL THE REPO ALREADY EXIST !!!!)

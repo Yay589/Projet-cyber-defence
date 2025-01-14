@@ -13,10 +13,10 @@
 #[all:vars]
 #ansible_python_interpreter=/usr/bin/python3
 [control]
-ansible_controller ansible_host=172.23.100.194
+ansible_controller ansible_host=192.168.19.189
 
 [targets]
-dvwa ansible_host=172.20.0.3
+dvwa ansible_host=192.168.19.191
 #vulnerable_linux ansible_host=172.23.100.30
 
 [all:vars]

@@ -1,2 +1,0 @@
-[vulnerable_containers]
-172.18.0.2 ansible_user=root ansible_ssh_pass=root
