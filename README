@@ -1,1 +1,43 @@
-Les étapes :
+#####Cyber Defence Dan Group Project - INSA 2024#####
+
+#Description
+
+This project is designed to replicate the a simple IT architecture using Docker containers. Once the contenerized basic architecture is setup, we proceed by creating some  vulnerabilities and try to detect and respond to them using  ansible  modules. Some of the  scenarios  that will be seen  through this  project  are:
+- Deployement of a  vulnerable containerized machine (such as DVWA) and analyze network-based vulnerabilities using Ansible modules.
+.......
+
+The main objective is to deepen our knowledge of Ansible playbooks and Docker containers by working on realistic scenarios involving automation and container management.
+
+#Prerequisites
+
+Before cloning the GitHub repository, ensure your environment meets the following requirements:
+
+Operating System: Ubuntu 22.04.
+Docker: Version 20.10.27 or later.
+Ansible: Version 2.10.8 or later.
+Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
+
+--------------------------------------------------------------------------------------------------------
+1. Configurer le fichier 'var.env'
+   - Ce fichier contient les adresses IP des machines et se trouve dans le dossier 'solution'.  
+
+2. Donner les droits d'exécution au script
+   - Exécutez la commande :  
+     chmod +x ./command.sh
+
+3. Lancer le script 'command.sh'  
+   - Exécutez la commande suivante :  
+     ./command.sh  
+
+4. Configurer les conteneurs Docker
+   - Rendez-vous dans le dossier 'Solution/docker/ubuntu-controller2'.  
+   - Exécutez la commande indiquée dans le fichier 'explication.txt'.  
+   - Une fois cela fait, en exécutant la commande 'docker ps', vous devriez voir les trois conteneurs nécessaires à l'utilisation.  
+   - Ce script permet de lancer les playbooks depuis la machine contrôleur (conteneur Ubuntu) vers la machine cible (conteneur DVWA).  
+
+6. Attendre l'exécution complète  
+   - L'exécution des playbooks peut prendre un peu de temps, car ils génèrent également des rapports.  
+
+7. Consulter les résultats 
+   - Connectez-vous à la machine contrôleur (conteneur Ubuntu).  
+   - Les résultats des playbooks sont disponibles dans le dossier '/tmp'.  
