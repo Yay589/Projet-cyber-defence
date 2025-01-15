@@ -1,0 +1,67 @@
+---
+- name: SSH Brute Force Detection and Mitigation
+  hosts: vulnerable_containers
+  become: yes
+  vars:
+    ssh_log_path: "/var/log/auth.log"  # Path to SSH log file
+    ban_time: 3600                    # Ban time in seconds
+    max_retries: 5                    # Maximum retries before banning
+    jail_name: "ssh-bf"
+  tasks:
+    - name: Install necessary tools
+      apt:
+        name:
+          - fail2ban
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install necessary tools (RHEL-based systems)
+      yum:
+        name:
+          - fail2ban
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Configure Fail2Ban for SSH brute force protection
+      copy:
+        dest: "/etc/fail2ban/jail.local"
+        content: |
+          [{{ jail_name }}]
+          enabled = true
+          port = ssh
+          filter = sshd
+          logpath = {{ ssh_log_path }}
+          maxretry = {{ max_retries }}
+          bantime = {{ ban_time }}
+          findtime = 600
+      notify:
+        - restart fail2ban
+
+    - name: Create SSH brute force filter
+      copy:
+        dest: "/etc/fail2ban/filter.d/sshd.local"
+        content: |
+          [Definition]
+          failregex = ^%(__prefix_line)s(?:error: PAM: Authentication failure|Invalid user|Connection closed by authenticating user).* <HOST>(?: port \d+)?$
+          ignoreregex =
+      notify:
+        - restart fail2ban
+
+    - name: Ensure Fail2Ban is running
+      service:
+        name: fail2ban
+        state: started
+        enabled: yes
+
+    - name: List banned IPs for monitoring
+      command: fail2ban-client status {{ jail_name }}
+      register: banned_ips
+
+    - debug:
+        msg: "{{ banned_ips.stdout_lines }}"
+
+  handlers:
+    - name: restart fail2ban
+      service:
+        name: fail2ban
+        state: restarted

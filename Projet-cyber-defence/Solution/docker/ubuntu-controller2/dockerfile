@@ -1,0 +1,25 @@
+FROM controller_updated:v2
+
+EXPOSE 22 80
+
+# Créer le répertoire de travail
+WORKDIR /ansible-config/
+
+RUN echo "root:root" | chpasswd
+
+# Copier les fichiers nécessaires
+COPY ./verified_playbooks/ /ansible-config/verified-playbooks/
+COPY ./inventory/ /ansible-config/inventory/
+COPY ./entrypoint.sh /ansible-config/entrypoint.sh
+
+
+# Rendre le script d'entrée exécutable
+RUN chmod -R 777 /ansible-config/verified-playbooks/
+RUN chmod -R 777 /ansible-config/inventory/
+RUN chmod 777 /ansible-config/entrypoint.sh
+
+# Configurer le point d'entrée
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint.sh & exec /usr/sbin/sshd -D"]
+
+# Start SSH service
+#CMD ["/bin/bash", "-c", "/usr/sbin/sshd -D & wait exec /bin/bash"]

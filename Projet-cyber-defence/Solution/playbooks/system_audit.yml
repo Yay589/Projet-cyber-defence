@@ -1,0 +1,44 @@
+# playbooks/system_audit.yml
+---
+- name: System Security Audit
+  hosts: targets
+  become: yes
+  
+  tasks:
+    - name: Check System Updates
+      ansible.builtin.apt:
+        update_cache: yes
+      check_mode: yes
+      register: updates_available
+
+    - name: Check User Accounts
+      ansible.builtin.getent:
+        database: passwd
+      register: user_accounts
+
+    - name: Check Sudo Rights
+      ansible.builtin.command: "grep -r NOPASSWD /etc/sudoers.d/"
+      ignore_errors: yes
+      register: sudo_rights
+
+    - name: Check Running Services
+      ansible.builtin.service_facts:
+      register: running_services
+
+    - name: Check Open Files
+      ansible.builtin.command: "lsof -i"
+      register: open_files
+      ignore_errors: yes
+
+    - name: Check File Permissions
+      ansible.builtin.find:
+        paths: /etc
+        patterns: "*"
+        file_type: file
+        recurse: yes
+      register: file_permissions
+
+    - name: Generate System Audit Report
+      ansible.builtin.template:
+        src: templates/system_audit_report.j2
+        dest: "/tmp/system_audit_{{ inventory_hostname }}.txt"

@@ -1,0 +1,34 @@
+---
+- name: Lynis Security Audit
+  hosts: dvwa
+  gather_facts: no
+  tasks:
+    - name: Create local and remote directories
+      raw: mkdir -p /tmp/lynis_audit
+      
+    - name: Install Lynis and dependencies
+      raw: |
+        apt-get update >/dev/null 2>&1
+        apt-get install -y lynis >/dev/null 2>&1
+
+    - name: Basic Lynis scan
+      raw: lynis audit system --quick --no-colors >/tmp/lynis_audit/report.txt 2>&1
+      ignore_errors: yes
+
+    - name: Get report content
+      raw: cat /tmp/lynis_audit/report.txt
+      register: report_content
+
+    - name: Create local directory
+      delegate_to: localhost
+      file:
+        path: /tmp/lynis_audit
+        state: directory
+        mode: '0755'
+
+    - name: Save report locally
+      delegate_to: localhost
+      copy:
+        content: "{{ report_content.stdout }}"
+        dest: "/tmp/lynis_audit/lynis_{{ inventory_hostname }}.txt"
+        mode: '0644'

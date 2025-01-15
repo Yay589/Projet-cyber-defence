@@ -1,0 +1,1 @@
+docker-compose down && docker-compose --env-file ../../var.env build && docker-compose --env-file ../../var.env up -d && docker ps && sleep 2 && docker ps

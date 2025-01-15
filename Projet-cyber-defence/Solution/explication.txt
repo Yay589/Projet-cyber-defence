@@ -1,0 +1,3 @@
+My Favorite commande for debugging: 
+
+docker-compose -f ./../Client//Ban/docker-compose.yml down && docker-compose -f ./docker/ubuntu-ready-container/docker-compose.yml down && docker-compose -f ../Client/dvwa-with-ssh/docker-compose.yaml down  && docker network remove custom_network_client && ./command.sh

@@ -1,0 +1,5 @@
+# playbooks/main.yml
+---
+- import_playbook: network_scan.yml
+- import_playbook: system_audit.yml
+- import_playbook: web_scan.yml
