@@ -1,6 +1,6 @@
 #####Cyber Defence Dan Group Project - INSA 2024#####
 
-#Description
+## Description
 
 This project is designed to replicate the a simple IT architecture using Docker containers. Once the contenerized basic architecture is setup, we proceed by creating some  vulnerabilities and try to detect and respond to them using  ansible  modules. Some of the  scenarios  that will be seen  through this  project  are:
 - Deployement of a  vulnerable containerized machine (such as DVWA) and analyze network-based vulnerabilities using Ansible modules.
