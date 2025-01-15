@@ -114,7 +114,8 @@ Below are some screenshots showing the results of running the playbooks and anal
 ![network scan nmap result](test/res_nmap_playbook.png)
 
 ### 📊 Generated Reports lynis
-![Generated Reports](test/lynis_playbook.png)
+![Generated Reports playbook lynis](test/lynis_playbook.png)
+![Generated Reports result](test/lynis-res_playbook.png)
 
 ---
 
