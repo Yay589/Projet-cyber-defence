@@ -1,98 +1,103 @@
-#####Cyber Defence Dan Group Project - INSA 2024#####
+# 🛡️ Cyber Defence Dan Group Project - INSA 2024
 
-## Description
+## 📄 Description
 
-This project is designed to replicate the a simple IT architecture using Docker containers. Once the contenerized basic architecture is setup, we proceed by creating some  vulnerabilities and try to detect and respond to them using  ansible  modules. Some of the  scenarios  that will be seen  through this  project  are:
-- Deployement of a  vulnerable containerized machine (such as DVWA) and analyze network-based vulnerabilities using Ansible modules.
-.......
+This project is designed to replicate a simple IT architecture using Docker containers. Once the containerized basic architecture is set up, we proceed by creating some vulnerabilities and try to detect and respond to them using **Ansible modules**. 
 
-The main objective is to deepen our knowledge of Ansible playbooks and Docker containers by working on realistic scenarios involving automation and container management.
+### Scenarios Covered:
+- Deployment of a vulnerable containerized machine (such as **DVWA**) and analysis of network-based vulnerabilities using Ansible modules.
 
-#Prerequisites
+The main objective is to deepen our knowledge of **Ansible playbooks** and **Docker containers** by working on realistic scenarios involving automation and container management.
 
-Before cloning the GitHub repository, ensure your environment meets the following requirements:
+---
 
-Operating System: Ubuntu 22.04.
-Docker: Version 20.10.27 or later.
-Ansible: Version 2.10.8 or later.
-Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
-
---------------------------------------------------------------------------------------------------------
-1. Configurer le fichier 'var.env'
-   - Ce fichier contient les adresses IP des machines et se trouve dans le dossier 'solution'.  
-
-2. Donner les droits d'exécution au script
-   - Exécutez la commande :  
-     chmod +x ./command.sh
-
-3. Lancer le script 'command.sh'  
-   - Exécutez la commande suivante :  
-     ./command.sh  
-
-4. Configurer les conteneurs Docker
-   - Rendez-vous dans le dossier 'Solution/docker/ubuntu-controller2'.  
-   - Exécutez la commande indiquée dans le fichier 'explication.txt'.  
-   - Une fois cela fait, en exécutant la commande 'docker ps', vous devriez voir les trois conteneurs nécessaires à l'utilisation.  
-   - Ce script permet de lancer les playbooks depuis la machine contrôleur (conteneur Ubuntu) vers la machine cible (conteneur DVWA).  
-
-6. Attendre l'exécution complète  
-   - L'exécution des playbooks peut prendre un peu de temps, car ils génèrent également des rapports.  
-
-7. Consulter les résultats 
-   - Connectez-vous à la machine contrôleur (conteneur Ubuntu).  
-   - Les résultats des playbooks sont disponibles dans le dossier '/tmp'.  
-
-
-----------------
-# Cyber Defence Dan Group Project - INSA 2024
-
-## Description
-
-This project is designed to replicate a simple IT architecture using Docker containers. Once the containerized basic architecture is set up, we proceed by creating some vulnerabilities and try to detect and respond to them using Ansible modules. Some of the scenarios that will be explored through this project are:
-
-- Deployment of a vulnerable containerized machine (such as DVWA) and analysis of network-based vulnerabilities using Ansible modules.
-- ...
-
-The main objective is to deepen our knowledge of Ansible playbooks and Docker containers by working on realistic scenarios involving automation and container management.
-
-## Prerequisites
+## ⚙️ Prerequisites
 
 Before cloning the GitHub repository, ensure your environment meets the following requirements:
 
-- **Operating System**: Ubuntu 22.04.
-- **Docker**: Version 20.10.27 or later.
-- **Ansible**: Version 2.10.8 or later.
+- **Operating System**: Ubuntu 22.04
+- **Docker**: Version 20.10.27 or later
+- **Ansible**: Version 2.10.8 or later
 
-Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
+> ⚠️ Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
 
-## Setup Instructions
+---
 
-1. **Configure the 'var.env' file**
-   - This file contains the IP addresses of the machines and is located in the 'solution' directory.
+## 🛠️ Steps to Set Up the Project
 
-2. **Grant execution rights to the script**
-   - Execute the following command:
-     ```bash
-     chmod +x ./command.sh
-     ```
+### 1️⃣ Configure the `var.env` File
+- This file contains the IP addresses of the machines and is located in the `solution` folder.
 
-3. **Run the 'command.sh' script**
-   - Execute the following command:
-     ```bash
-     ./command.sh
-     ```
+### 2️⃣ Grant Execution Rights to the Script
+Run the following command to make the script executable:
+```bash
+chmod +x ./command.sh
+```
 
-4. **Configure Docker containers**
-   - Navigate to the 'Solution/docker/ubuntu-controller2' directory.
-   - Execute the command indicated in the 'explication.txt' file.
-   - Once done, running the command `docker ps` should display the three necessary containers for usage.
-   - This script allows you to launch the playbooks from the controller machine (Ubuntu container) to the target machine (DVWA container).
+### 3️⃣ Launch the Script `command.sh`
+Execute the script using:
+```bash
+./command.sh
+```
 
-5. **Wait for complete execution**
-   - The execution of the playbooks may take some time, as they also generate reports.
+### 4️⃣ Configure Docker Containers
+- Navigate to the folder `Solution/docker/ubuntu-controller2`.
+- Execute the command specified in the `explication.txt` file.
+- Verify the setup by running:
+```bash
+docker ps
+```
+You should see the three containers necessary for the project.
 
-6. **Check the results**
-   - Connect to the controller machine (Ubuntu container).
-   - The results of the playbooks are available in the '/tmp' directory.
+> 📝 This script allows the playbooks to run from the controller machine (Ubuntu container) to the target machine (DVWA container).
 
-## Project Structure
+### 5️⃣ Wait for Complete Execution
+The playbooks may take some time to execute as they also generate reports.
+
+### 6️⃣ View Results
+- Connect to the controller machine (Ubuntu container):
+```bash
+docker exec -it <controller-container-name> bash
+```
+- The results of the playbooks will be available in the folder `/tmp`.
+
+---
+
+## 💡 Tips and Notes
+- Use `docker logs <container-name>` to debug any issues with the containers.
+- Check Ansible logs for detailed playbook execution traces in `/var/log/ansible.log`.
+- For advanced configurations, modify the `ansible.cfg` file located in the root directory.
+
+---
+
+## 🖼️ Example Output
+```plaintext
+PLAY [Detect Vulnerabilities] *************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [target_machine]
+
+TASK [Check for open ports] ****************************************************
+changed: [target_machine]
+
+PLAY RECAP *********************************************************************
+target_machine              : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
+
+---
+
+## 📂 Project Structure
+```
+├── README.md
+├── Solution
+│   ├── docker
+│   │   ├── ubuntu-controller2
+│   │   │   ├── Dockerfile
+│   │   │   ├── explication.txt
+│   ├── var.env
+├── command.sh
+```
+
+---
+
+🎉 **Happy Hacking!**
