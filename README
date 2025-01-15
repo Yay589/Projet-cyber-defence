@@ -41,3 +41,59 @@ Proper installation and configuration of these tools are essential for the proje
 7. Consulter les résultats 
    - Connectez-vous à la machine contrôleur (conteneur Ubuntu).  
    - Les résultats des playbooks sont disponibles dans le dossier '/tmp'.  
+
+
+
+# Cyber Defence Dan Group Project - INSA 2024
+
+## Description
+
+This project is designed to replicate a simple IT architecture using Docker containers. Once the containerized basic architecture is set up, we proceed by creating some vulnerabilities and try to detect and respond to them using Ansible modules. Some of the scenarios that will be explored through this project are:
+
+- Deployment of a vulnerable containerized machine (such as DVWA) and analysis of network-based vulnerabilities using Ansible modules.
+- ...
+
+The main objective is to deepen our knowledge of Ansible playbooks and Docker containers by working on realistic scenarios involving automation and container management.
+
+## Prerequisites
+
+Before cloning the GitHub repository, ensure your environment meets the following requirements:
+
+- **Operating System**: Ubuntu 22.04.
+- **Docker**: Version 20.10.27 or later.
+- **Ansible**: Version 2.10.8 or later.
+
+Proper installation and configuration of these tools are essential for the project to function correctly. Once your system is ready, you can proceed to clone the repository and start working on the lab.
+
+## Setup Instructions
+
+1. **Configure the 'var.env' file**
+   - This file contains the IP addresses of the machines and is located in the 'solution' directory.
+
+2. **Grant execution rights to the script**
+   - Execute the following command:
+     ```bash
+     chmod +x ./command.sh
+     ```
+
+3. **Run the 'command.sh' script**
+   - Execute the following command:
+     ```bash
+     ./command.sh
+     ```
+
+4. **Configure Docker containers**
+   - Navigate to the 'Solution/docker/ubuntu-controller2' directory.
+   - Execute the command indicated in the 'explication.txt' file.
+   - Once done, running the command `docker ps` should display the three necessary containers for usage.
+   - This script allows you to launch the playbooks from the controller machine (Ubuntu container) to the target machine (DVWA container).
+
+5. **Wait for complete execution**
+   - The execution of the playbooks may take some time, as they also generate reports.
+
+6. **Check the results**
+   - Connect to the controller machine (Ubuntu container).
+   - The results of the playbooks are available in the '/tmp' directory.
+
+## Project Structure
+
