@@ -1,4 +1,4 @@
-FROM controller_updated:v2
+FROM dvwa_updated:latest
 
 # Expose the required ports
 EXPOSE 22 80

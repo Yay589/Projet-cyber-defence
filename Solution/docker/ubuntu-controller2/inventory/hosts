@@ -10,13 +10,12 @@
 #vulnerable_linux ansible_host=192.168.1.30 ansible_user=root
 
 
-#[all:vars]
-#ansible_python_interpreter=/usr/bin/python3
 [control]
 ansible_controller ansible_host=192.168.19.189
 
 [targets]
-dvwa ansible_host=192.168.19.191
+#dvwa ansible_host=192.168.19.191
+dvwa ansible_host=192.168.19.191 ansible_user=root ansible_ssh_pass=root
 #vulnerable_linux ansible_host=172.23.100.30
 
 [all:vars]

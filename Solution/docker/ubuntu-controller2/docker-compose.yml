@@ -15,6 +15,6 @@ services:
     networks:
       custom_network_client:
         ipv4_address: ${S_CONTAINER2_IP}  # IP fixe à définir dans un fichier .env
-    command: /ansible-config/entrypoint.sh && sleep infinity
+    command:  /usr/sbin/sshd -D &
     environment:
       ANSIBLE_HOST_KEY_CHECKING: "False"  # Variable d'environnement pour désactiver la vérification des clés SSH

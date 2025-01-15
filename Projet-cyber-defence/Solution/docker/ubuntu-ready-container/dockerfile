@@ -1,9 +1,0 @@
-# Base image
-FROM ubuntu-test
-
-
-# Expose SSH port
-EXPOSE 22 80
-
-# Start SSH service
-CMD ["/usr/sbin/sshd", "-D"]

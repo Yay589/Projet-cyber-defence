@@ -1,0 +1,20 @@
+nsible-playbook -i ../../Solution/inventory/hosts ../../Solution/playbooks/lynis_audit.yml --ask-become-pass
+
+
+
+-------------------------------------------
+VULN
+watch -d fail2ban-client status sshd
+
+BAN 
+ssh root@192.168.19.191
+
+1)
+echo "" > /root/.ssh/known_hosts && ssh root@192.168.19.191
+
+2)
+ssh-keygen -f ~/.ssh/known_hosts -R 192.168.19.191 && ssh root@192.168.19.191
+-------------------------------------------
+
+
+
