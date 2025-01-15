@@ -42,3 +42,163 @@ Proper installation and configuration of these tools are essential for the proje
    - Connectez-vous à la machine contrôleur (conteneur Ubuntu).  
    - Les résultats des playbooks sont disponibles dans le dossier '/tmp'.  
 
+
+----------------
+
+
+Got it! Here's your `README.md` rewritten in the style you provided, with a similar structure and tone:
+
+---
+
+# Cyber Defence Dan Group Project - INSA 2024
+
+This repository contains the code and resources for the Cyber Defence Dan Group Project, designed to replicate a simple IT architecture using Docker containers. The project involves creating vulnerabilities in containerized environments and detecting/responding to them using Ansible modules. The goal is to deepen our understanding of Ansible playbooks and Docker container management through realistic scenarios.
+
+---
+
+## Prerequisite Environment Variables
+
+Before running the project, ensure the following environment variables are set. These are required for proper execution:
+
+- **DOCKER_VERSION**: Ensure Docker is installed and running (version 20.10.27 or later).
+- **ANSIBLE_VERSION**: Ensure Ansible is installed (version 2.10.8 or later).
+- **UBUNTU_VERSION**: The project is tested on Ubuntu 22.04.
+- **TARGET_IP**: The IP address of the target machine (DVWA container).
+- **CONTROLLER_IP**: The IP address of the controller machine (Ubuntu container).
+
+These variables are checked during the setup process. If any are missing, the project will not run correctly.
+
+---
+
+## Deployment of the Project
+
+The project is designed to run in a Dockerized environment. Follow these steps to deploy and run the project:
+
+1. **Configure the `var.env` file**  
+   - This file contains the IP addresses of the machines and is located in the `solution` directory. Update it with the correct values.
+
+2. **Grant execution rights to the script**  
+   - Run the following command to make the script executable:  
+     ```bash
+     chmod +x ./command.sh
+     ```
+
+3. **Run the `command.sh` script**  
+   - Execute the script to set up the environment:  
+     ```bash
+     ./command.sh
+     ```
+
+4. **Configure Docker containers**  
+   - Navigate to the `Solution/docker/ubuntu-controller2` directory.  
+   - Follow the instructions in the `explication.txt` file to configure the containers.  
+   - Once configured, run `docker ps` to verify that the three required containers are running:  
+     - Ubuntu Controller  
+     - DVWA Target  
+     - (Third container, if applicable)  
+
+5. **Wait for playbook execution**  
+   - The Ansible playbooks will run automatically from the controller machine to the target machine.  
+   - This process may take some time, as it includes vulnerability detection, response, and report generation.
+
+6. **Check the results**  
+   - Connect to the Ubuntu controller container.  
+   - The results of the playbooks are stored in the `/tmp` directory.  
+
+---
+
+## Running Commands
+
+The project uses Ansible playbooks to automate vulnerability detection and response. Here’s how to interact with the system:
+
+- **Playbook Execution**: Playbooks are automatically triggered during the setup process.  
+- **Manual Playbook Execution**: You can manually run playbooks from the controller machine using:  
+  ```bash
+  ansible-playbook <playbook-name>.yml
+  ```  
+- **Reports**: Generated reports are saved in the `/tmp` directory on the controller machine.  
+
+---
+
+## Release Process
+
+The project follows a structured release process to ensure stability and reproducibility:
+
+1. **Code Development**: Code is developed and tested locally.  
+2. **Docker Image Creation**: Docker images are built and pushed to a registry.  
+3. **Playbook Testing**: Ansible playbooks are tested against the containerized environment.  
+4. **Final Deployment**: The project is deployed to the target environment for final testing.  
+
+---
+
+## Command Line Process
+
+If you need to run the project outside of the automated setup, follow these steps:
+
+1. **Set up the environment**:  
+   - Ensure all prerequisite environment variables are set.  
+   - Use fake values for variables not needed for your specific task.  
+
+2. **Run the setup manually**:  
+   - Navigate to the `Solution/docker/ubuntu-controller2` directory.  
+   - Run the commands listed in `explication.txt` to start the containers.  
+
+3. **Execute playbooks manually**:  
+   - Use the following command to run playbooks from the controller machine:  
+     ```bash
+     ansible-playbook <playbook-name>.yml
+     ```  
+
+---
+
+## Dependencies
+
+The project relies on the following tools and libraries:
+
+- **Docker**: Version 20.10.27 or later.  
+- **Ansible**: Version 2.10.8 or later.  
+- **Python**: Python 3.7+ is required for Ansible.  
+- **Git**: For version control and cloning the repository.  
+
+To install dependencies, use the following commands:
+
+```bash
+# Install Docker
+sudo apt-get update
+sudo apt-get install docker.io
+
+# Install Ansible
+sudo apt-get install ansible
+
+# Install Python
+sudo apt-get install python3
+```
+
+---
+
+## Contributing
+
+If you wish to contribute to this project, follow these steps:
+
+1. Fork the repository.  
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).  
+3. Commit your changes (`git commit -m 'Add some feature'`).  
+4. Push to the branch (`git push origin feature/YourFeatureName`).  
+5. Open a pull request.  
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+---
+
+## Acknowledgments
+
+- **INSA 2024** for providing the opportunity to work on this project.  
+- **Team Members** for their dedication and collaboration.  
+
+---
+
+This `README.md` is written in the style you requested, with clear sections, concise instructions, and a focus on usability. Let me know if you need further adjustments!
