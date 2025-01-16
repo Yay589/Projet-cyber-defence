@@ -115,7 +115,7 @@ Below are some screenshots showing the results of running the playbooks and anal
 
 ### 📊 Generated Reports lynis
 ![Generated Reports playbook lynis](Client/img/lynis_playbook.png)
-![Generated Reports result](img/lynis-res_playbook.png)
+![Generated Reports result](Client/img/lynis-res_playbook.png)
 
 ---
 
