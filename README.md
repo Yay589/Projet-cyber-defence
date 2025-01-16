@@ -107,15 +107,15 @@ target_machine              : ok=5    changed=2    unreachable=0    failed=0    
 Below are some screenshots showing the results of running the playbooks and analyzing the vulnerabilities:
 
 ### 🖥️ Playbook Execution & Results
-![Playbook Execution fail2ban test](test/Client/img/fail2ban-test.jpg)
+![Playbook Execution fail2ban test](Client/img/fail2ban-test.jpg)
 
 ### 🔍 Vulnerability network scan 
-![network scan nmap playbook](test/Client/img/real_nmap.png)
-![network scan nmap result](test/Client/img/res_nmap_playbook.png)
+![network scan nmap playbook](Client/img/real_nmap.png)
+![network scan nmap result](Client/img/res_nmap_playbook.png)
 
 ### 📊 Generated Reports lynis
-![Generated Reports playbook lynis](test/Client/img/lynis_playbook.png)
-![Generated Reports result](test/Clientimg/lynis-res_playbook.png)
+![Generated Reports playbook lynis](Client/img/lynis_playbook.png)
+![Generated Reports result](Clientimg/lynis-res_playbook.png)
 
 ---
 
